@@ -56,7 +56,17 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
 
         setContentView(R.layout.activity_loading)
         if (savedInstanceState == null) {
-            val gameId = intent.data?.pathSegments?.let { it[it.size - 1].toInt() }!!
+            val uri = intent.data
+            val segments = uri?.pathSegments.orEmpty()
+            val gameId = segments.lastOrNull()?.toIntOrNull()
+            if (
+                uri == null || uri.scheme != "arcadeia" || uri.host != packageName ||
+                segments.size != 3 || segments.take(2) != listOf("play-game", "id") ||
+                gameId == null || gameId <= 0
+            ) {
+                displayErrorMessage()
+                return
+            }
 
             lifecycleScope.launch {
                 loadingState.value = true

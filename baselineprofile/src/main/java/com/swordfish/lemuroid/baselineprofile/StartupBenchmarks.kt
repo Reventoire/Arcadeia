@@ -44,9 +44,9 @@ class StartupBenchmarks {
     fun startupCompilationBaselineProfiles() = benchmark(CompilationMode.Partial(BaselineProfileMode.Require))
 
     private fun benchmark(compilationMode: CompilationMode) {
-        // This example works only with the variant with application id `com.swordfish.lemuroid`."
+        // Benchmark the release identity; Kotlin packages remain upstream-compatible.
         rule.measureRepeated(
-            packageName = "com.swordfish.lemuroid",
+            packageName = "io.github.reventoire.arcadeia",
             metrics = listOf(StartupTimingMetric()),
             compilationMode = compilationMode,
             startupMode = StartupMode.COLD,

@@ -12,7 +12,8 @@ android {
     defaultConfig {
         versionCode = 252
         versionName = "1.17.0" // Always remember to update Cores Tag!
-        applicationId = "com.swordfish.lemuroid"
+        // Installed identity is independent of the retained upstream Kotlin namespace.
+        applicationId = "io.github.reventoire.arcadeia"
     }
     flavorDimensions += listOf("opensource", "cores")
 
@@ -78,30 +79,43 @@ android {
         }
     }
 
+    // Do not reuse upstream signing material. Missing credentials produce unsigned releases.
+    val releaseSigningNames = listOf(
+        "ARCADEIA_KEYSTORE_PATH",
+        "ARCADEIA_KEY_ALIAS",
+        "ARCADEIA_STORE_PASSWORD",
+        "ARCADEIA_KEY_PASSWORD",
+    )
+    val releaseSigningValues = releaseSigningNames.map { providers.environmentVariable(it).orNull }
+    require(releaseSigningValues.all { it.isNullOrBlank() } || releaseSigningValues.all { !it.isNullOrBlank() }) {
+        "Set all four ARCADEIA signing variables, or none for an unsigned release."
+    }
+    val hasReleaseSigning = releaseSigningValues.all { !it.isNullOrBlank() }
     signingConfigs {
-        maybeCreate("debug").apply {
-            storeFile = file("$rootDir/debug.keystore")
-        }
-
-        maybeCreate("release").apply {
-            storeFile = file("$rootDir/release.jks")
-            keyAlias = "lemuroid"
-            storePassword = "lemuroid"
-            keyPassword = "lemuroid"
+        // Debug uses the developer's standard Android debug keystore.
+        if (hasReleaseSigning) {
+            create("arcadeiaRelease") {
+                storeFile = file(releaseSigningValues[0]!!)
+                keyAlias = releaseSigningValues[1]!!
+                storePassword = releaseSigningValues[2]!!
+                keyPassword = releaseSigningValues[3]!!
+            }
         }
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            signingConfig = signingConfigs["release"]
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs["arcadeiaRelease"]
+            }
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            resValue("string", "lemuroid_name", "Lemuroid")
+            resValue("string", "lemuroid_name", "Arcadeia")
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            resValue("string", "lemuroid_name", "LemuroiDebug")
+            resValue("string", "lemuroid_name", "Arcadeia Debug")
         }
     }
 

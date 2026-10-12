@@ -1,21 +1,31 @@
-# Lemuroid
+# Arcadeia
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-     alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/com.swordfish.lemuroid/)
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=com.swordfish.lemuroid)
+Arcadeia is an independently installable Android emulator fork of
+[Lemuroid](https://github.com/Swordfish90/Lemuroid), based on Libretro.
+It retains the existing emulator functionality while using its own Android identity.
 
-## Description
+- Release ID: `io.github.reventoire.arcadeia`
+- Debug ID: `io.github.reventoire.arcadeia.debug`
+- Source and project updates: https://github.com/Reventoire/Arcadeia
+- No Arcadeia Play Store or F-Droid listing is established by this repository.
+  The upstream listings distribute Lemuroid, not Arcadeia.
 
-Lemuroid is an open-source emulation project for Android based on Libretro. Its main goal is ease of use, good Android integration and a great user experience.
+See [identity, build and device verification](docs/application-identity.md).
 
-It originated from a rib of [Retrograde](https://github.com/retrograde/retrograde-android), but graduated to a standalone project integrating [LibretroDroid](https://github.com/Swordfish90/LibretroDroid).
+## Attribution and license
 
-|Screen 1|Screen 2|Screen 3|
-|---|---|---|
-|![Screen1](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg)|![Screen2](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg)|![Screen3](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg)|
+Arcadeia derives from Lemuroid by Swordfish90 and its contributors, which originated
+from [Retrograde](https://github.com/retrograde/retrograde-android) and integrates
+[LibretroDroid](https://github.com/Swordfish90/LibretroDroid) and Libretro cores.
+The existing [GPL license](COPYING), source copyright notices and
+[in-app third-party notices](lemuroid-app/src/main/res/raw/licenses.html) are preserved.
+Distribute corresponding source with binary releases as required by the applicable
+licenses; emulator cores and dependencies retain their own notices and terms.
+
+The identity migration changes installed IDs, links, signing configuration and
+product branding. Internal Kotlin packages and emulator/core module names remain
+upstream-compatible. Upstream screenshots under `fastlane` are historical references,
+not verified Arcadeia release screenshots.
 
 ### Supported Systems:
 - Atari 2600 (A26) ([stella](https://docs.libretro.com/library/stella/))
@@ -57,5 +67,8 @@ It originated from a rib of [Retrograde](https://github.com/retrograde/retrograd
 - Cloud save sync
 - HD mode
 
-### Languages:
-You can help translate Lemuroid in your native language by going here: https://crowdin.com/project/lemuroid
+### Translations
+
+Arcadeia translations live in the Android string resources. Existing translations
+are inherited from Lemuroid; product-name substitutions need native-speaker review.
+The upstream Crowdin project belongs to Lemuroid.
