@@ -23,6 +23,11 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - uses: android-actions/setup-android@v3
+
+      - name: Install required Android SDK packages
+        run: sdkmanager 'platforms;android-35' 'build-tools;34.0.0'
+
       - name: Create Arcadeia release keystore
         env:
           ARCADEIA_RELEASE_KEYSTORE_BASE64: ${{ secrets.ARCADEIA_RELEASE_KEYSTORE_BASE64 }}
