@@ -66,7 +66,7 @@ class ChannelHandler(
         ChannelLogoUtils.storeChannelLogo(
             appContext,
             channelId,
-            convertToBitmap(appContext, R.mipmap.lemuroid_tv_channel)!!,
+            convertToBitmap(appContext, R.mipmap.arcadeia_tv_channel)!!,
         )
 
         TvContractCompat.requestChannelBrowsable(appContext, channelId)

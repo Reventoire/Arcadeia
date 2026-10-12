@@ -38,9 +38,9 @@ class BaselineProfileGenerator {
 
     @Test
     fun generate() {
-        // This example works only with the variant with application id `com.swordfish.lemuroid`."
+        // Benchmark the release identity; Kotlin packages remain upstream-compatible.
         rule.collect(
-            packageName = "com.swordfish.lemuroid",
+            packageName = "io.github.reventoire.arcadeia",
             // See: https://d.android.com/topic/performance/baselineprofiles/dex-layout-optimizations
             includeInStartupProfile = true,
         ) {

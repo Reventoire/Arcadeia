@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -23,19 +23,38 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Create release keystore
-        run: |
-          echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
-          gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > release.jks
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Install required Android SDK packages
+        run: sdkmanager 'platforms;android-35' 'build-tools;34.0.0'
+
+      - name: Create Arcadeia release keystore
+        env:
+          ARCADEIA_RELEASE_KEYSTORE_BASE64: ${{ secrets.ARCADEIA_RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          test -n "$ARCADEIA_RELEASE_KEYSTORE_BASE64"
+          printf '%s' "$ARCADEIA_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/arcadeia-release.jks"
 
       - name: Run Assemble Artifact
-        run: ./gradlew assembleFreeDynamic
+        env:
+          ARCADEIA_KEYSTORE_PATH: ${{ runner.temp }}/arcadeia-release.jks
+          ARCADEIA_KEY_ALIAS: ${{ secrets.ARCADEIA_KEY_ALIAS }}
+          ARCADEIA_STORE_PASSWORD: ${{ secrets.ARCADEIA_STORE_PASSWORD }}
+          ARCADEIA_KEY_PASSWORD: ${{ secrets.ARCADEIA_KEY_PASSWORD }}
+        run: |
+          test -n "$ARCADEIA_KEY_ALIAS"
+          test -n "$ARCADEIA_STORE_PASSWORD"
+          test -n "$ARCADEIA_KEY_PASSWORD"
+          ./gradlew :lemuroid-app:assembleFreeDynamicRelease --console=plain
+
+      - name: Remove signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/arcadeia-release.jks"
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: lemuroid-app/build/outputs/apk/freeDynamic/release/lemuroid-app-free-dynamic-release.apk
@@ -47,7 +66,7 @@ jobs:
 
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v3.0.0
+        uses: actions/download-artifact@v4
         with:
           name: apk
 
