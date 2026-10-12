@@ -23,6 +23,8 @@ jobs:
       - name: Verify source identity
         run: python3 scripts/check_application_identity.py
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
       - name: Install required Android SDK packages
         run: sdkmanager 'platforms;android-35' 'build-tools;34.0.0'
       - name: Build and lint independent debug APK
