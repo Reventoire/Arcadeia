@@ -2,7 +2,7 @@
 
 <img src="new-icons/arcadeia.png" alt="Arcadeia" width="128" />
 
-# Arcadeia
+# Arcadeia 🎮
 
 **Your games, systems, and emulators in one place.**
 
