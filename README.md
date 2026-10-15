@@ -1,61 +1,60 @@
-# Lemuroid
+<div align="center">
+  <img src="new-icons/arcadeia.png" alt="Arcadeia" width="112" />
+  <h1>Arcadeia</h1>
+  <p><strong>Your retro game library, ready to play.</strong><br />
+  An open-source Android frontend for Libretro and standalone emulators.</p>
+  <p><strong>Android · Kotlin · Jetpack Compose · GPL-3.0</strong><br />
+  Arcadeia blue: <code>#2766B0</code></p>
+</div>
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-     alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/com.swordfish.lemuroid/)
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=com.swordfish.lemuroid)
+<table align="center">
+  <tr>
+    <td width="33%"><img src="docs/screenshots/dashboard.jpg" alt="Arcadeia dashboard with a featured game, library totals, and unplayed games" /></td>
+    <td width="33%"><img src="docs/screenshots/library.jpg" alt="Arcadeia game library with cover art and filters" /></td>
+    <td width="33%"><img src="docs/screenshots/settings.jpg" alt="Arcadeia appearance and settings" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Dashboard</sub></td>
+    <td align="center"><sub>Library</sub></td>
+    <td align="center"><sub>Settings</sub></td>
+  </tr>
+</table>
 
-## Description
+## Features
 
-Lemuroid is an open-source emulation project for Android based on Libretro. Its main goal is ease of use, good Android integration and a great user experience.
+- **Folder-aware library** — identifies systems from ROM folder names before file metadata, then organizes games into systems, favorites, collections, and recent-play lists. Folder aliases follow [ES-DE](https://es-de.org/) conventions.
+- **Unified discovery** — searches and combines game entries from [IGDB](https://api-docs.igdb.com/), [ScreenScraper](https://www.screenscraper.fr/), and [TheGamesDB](https://thegamesdb.net/). Provider credentials, approval, or proxy setup may be required.
+- **External emulators** — launch compatible games or find official releases for supported emulator apps:
 
-It originated from a rib of [Retrograde](https://github.com/retrograde/retrograde-android), but graduated to a standalone project integrating [LibretroDroid](https://github.com/Swordfish90/LibretroDroid).
+  | System | Emulator | Official releases |
+  | --- | --- | --- |
+  | PlayStation 2 | [ARMSX2](https://github.com/ARMSX2/ARMSX2), [NetherSX2 Classic](https://github.com/Trixarian/NetherSX2-classic) | [ARMSX2](https://github.com/ARMSX2/ARMSX2/releases) · [NetherSX2](https://github.com/Trixarian/NetherSX2-classic/releases) |
+  | Nintendo Switch | [Eden](https://git.eden-emu.dev/eden-emu/eden) | [Eden](https://git.eden-emu.dev/eden-emu/eden/releases) |
+  | Nintendo 3DS | [Azahar](https://github.com/azahar-emu/azahar) | [Azahar](https://github.com/azahar-emu/azahar/releases) |
 
-|Screen 1|Screen 2|Screen 3|
-|---|---|---|
-|![Screen1](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg)|![Screen2](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg)|![Screen3](https://github.com/Swordfish90/Lemuroid/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg)|
+  Arcadeia checks release compatibility and opens Android's installer for confirmation.
+- **Play your way** — Libretro cores, save states, autosaves, optional cloud sync, touch and gamepad controls, and Android TV support.
+- **Portable save vault** — keep exported Eden save archives and PS2 memory cards together; restore them through the emulator's own import flow.
+- **Expressive design** — adaptive Material 3, dynamic color options, and a pure-black AMOLED theme.
 
-### Supported Systems:
-- Atari 2600 (A26) ([stella](https://docs.libretro.com/library/stella/))
-- Atari 7800 (A78) ([prosystem](https://docs.libretro.com/library/prosystem/))
-- Atari Lynx (Lynx) ([handy](https://docs.libretro.com/library/handy/))
-- Nintendo (NES) ([fceumm](https://docs.libretro.com/library/fceumm/))
-- Super Nintendo (SNES) ([snes9x](https://docs.libretro.com/library/snes9x/))
-- Game Boy (GB) ([gambatte](https://docs.libretro.com/library/gambatte/))
-- Game Boy Color (GBC) ([gambatte](https://docs.libretro.com/library/gambatte/))
-- Game Boy Advance (GBA) ([mgba](https://docs.libretro.com/library/mgba/))
-- Sega Genesis (aka Megadrive) ([genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/))
-- Sega CD (aka Mega CD) ([genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/))
-- Sega Master System (SMS) ([genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/))
-- Sega Game Gear (GG) ([genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/))
-- Nintendo 64 (N64) ([mupen64plus](https://docs.libretro.com/library/mupen64plus/))
-- PlayStation (PSX) ([PCSX-ReARMed](https://docs.libretro.com/library/pcsx_rearmed/))
-- PlayStation Portable (PSP) ([ppsspp](https://docs.libretro.com/library/ppsspp/))
-- FinalBurn Neo (Arcade) ([fbneo](https://github.com/libretro/FBNeo/))
-- Nintendo DS (NDS) ([desmume](https://docs.libretro.com/library/desmume/)/[MelonDS](https://docs.libretro.com/library/melonds/))
-- NEC PC Engine (PCE) ([beetle_pce_fast](https://docs.libretro.com/library/beetle_pce_fast/))
-- Neo Geo Pocket (NGP) ([mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/))
-- Neo Geo Pocket Color (NGC) ([mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/))
-- WonderSwan (WS) ([beetle_cygne](https://docs.libretro.com/library/beetle_cygne/))
-- WonderSwan Color (WSC) ([beetle_cygne](https://docs.libretro.com/library/beetle_cygne/))
-- Nintendo 3DS (3DS) ([citra](https://docs.libretro.com/library/citra/))
+## Supported systems
 
-### Features:
-- Android TV support
-- Automatically save and restore game states.
-- ROMs scanning and indexing
-- Optimized touch controls
-- Quick save/load
-- Support for Zipped ROMs
-- Display simulation (LCD/CRT)
-- Gamepad support
-- Local multiplayer
-- Tilt input
-- Customizable touch controls (size and position)
-- Cloud save sync
-- HD mode
+**Libretro:** Atari 2600, 7800 and Lynx; NES; SNES; Game Boy, Color and Advance; Genesis and Sega CD; Master System; Game Gear; Nintendo 64; PlayStation; PSP; Nintendo DS; Arcade (FinalBurn Neo and MAME 2003 Plus); PC Engine; Neo Geo Pocket and Color; WonderSwan and Color; DOS; Nintendo 3DS with a compatible Citra core.
 
-### Languages:
-You can help translate Lemuroid in your native language by going here: https://crowdin.com/project/lemuroid
+PlayStation 2 and Nintendo Switch use compatible external emulator apps listed above. Available cores and formats depend on the app build and device.
+
+Arcadeia does not include ROM or BIOS files.
+
+## Build
+
+With the Android SDK and JDK configured:
+
+```sh
+./gradlew :arcadeia-app:assembleFreeDynamicDebug
+```
+
+## Credits
+
+Arcadeia is a fork of [Lemuroid](https://github.com/Swordfish90/Lemuroid) and integrates [LibretroDroid](https://github.com/Swordfish90/LibretroDroid). The folder model references [ES-DE](https://es-de.org/); UI studies include [PixelMusic](https://github.com/Xing1P/PixelMusic) and [PixelPlayer](https://github.com/PixelPlayerHQ/PixelPlayer).
+
+Arcadeia is licensed under [GPL-3.0](COPYING). Third-party notices and licenses are in [`licenses/`](licenses/).
